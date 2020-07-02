@@ -1,0 +1,21 @@
+{
+  "name": "workit",
+  "version": "1.0.0",
+  "description": "Time tracker app for my girlfriend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js --prefix server",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "react-router-dom": "^5.1.2"
+  }
+}
