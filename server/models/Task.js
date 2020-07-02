@@ -8,13 +8,17 @@ const TaskSchema = new Schema({
 	},
 	start: {
 		type: Date,
-		required: true,
+		required: false,
 		default: Date.now()
 	},
 	end: {
 		type: Date,
 		required: false,
 		default: null
+	}
+	_user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
 	}
 }, {
 	timestamps: true
