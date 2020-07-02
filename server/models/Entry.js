@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-const TaskSchema = require('./Task')
 
 const EntrySchema = new Schema({
-	tasks: [TaskSchema],
 	signIn: {
 		type: Date,
 		required: true,
