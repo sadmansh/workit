@@ -1,1 +1,5 @@
 export const FETCH_USER = 'fetch_user'
+export const FETCH_ENTRIES = 'fetch_entries'
+export const CREATE_ENTRY = 'create_entry'
+export const UPDATE_ENTRY = 'update_entry'
+export const DELETE_ENTRY = 'delete_entry'
