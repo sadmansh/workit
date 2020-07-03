@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 import Landing from './Landing'
-import Login from './Login'
-import Register from './Register'
+import Login from './Authentication/Login'
+import Register from './Authentication/Register'
 import Dashboard from './Dashboard'
 
 class App extends Component {
