@@ -7,8 +7,11 @@ const AddTask = props => {
 	const [task, setTask] = useState({
 		start: '',
 		end: '',
-		details: ''
+		details: '',
+		_entry: props.entry
 	})
+
+	const dispatch = useDispatch()
 
 	const inputHandler = e => {
 		setTask({...task, [e.target.name]: e.target.value})
@@ -16,7 +19,7 @@ const AddTask = props => {
 	const formHandler = e => {
 		e.preventDefault()
 		console.log(task)
-		// dispatch(actions.createTask(task))
+		dispatch(actions.createTask(task))
 		e.target.reset()
 	}
 

@@ -16,7 +16,7 @@ const SignIn = props => {
 				let date = moment(entry.signIn)
 				if (date.isSame(moment(Date.now()), 'day')) {
 					setStart(entry.signIn)
-					props.setSignedIn(true)
+					props.setEntry(entry._id)
 				}
 			})
 		}

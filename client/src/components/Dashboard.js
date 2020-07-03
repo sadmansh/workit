@@ -7,7 +7,7 @@ import AddTask from './Task/AddTask'
 // import SignOut from './Entry/SignOut'
 
 const Dashboard = () => {
-	const [signedIn, setSignedIn] = useState(false)
+	const [entry, setEntry] = useState('')
 
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
@@ -21,10 +21,10 @@ const Dashboard = () => {
 	return (
 		<div>
 			<div>Hello, {user.firstName}!</div>
-			<SignIn entries={entries} setSignedIn={setSignedIn} />
+			<SignIn entries={entries} setEntry={setEntry} />
 
-			{signedIn ? 
-				<AddTask />
+			{entry.length ? 
+				<AddTask entry={entry} />
 				: ''
 			}
 		</div>
