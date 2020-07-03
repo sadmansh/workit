@@ -11,7 +11,7 @@ const EntrySchema = new Schema({
 		type: Date,
 		required: false,
 		default: null
-	}
+	},
 	_user: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'

@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const jwt = require('jwt-simple')
 
 const keys = require('../config/keys')
-const User = mongoose.model('users')
+const User = mongoose.model('User')
 
 router.post('/auth/register', async (req, res, next) => {
 	const user = req.body
@@ -15,7 +15,8 @@ router.post('/auth/register', async (req, res, next) => {
 	if (existingUser) return res.status(422).send({ error: 'User already exists.' })
 	try {
 		const newUser = await new User(user).save()
-		res.json({ token: tokenForUser(newUser) })
+		newUser.password = null
+		res.json({ token: tokenForUser(newUser), user: newUser })
 	} catch (error) {
 		return res.status(422).send({ error: error })
 	}
@@ -23,7 +24,8 @@ router.post('/auth/register', async (req, res, next) => {
 })
 
 router.post('/auth/login', passport.authenticate('local', { session: true }), (req, res, next) => {
-	res.send({ token: tokenForUser(req.user) })
+	req.user.password = null
+	res.send({ token: tokenForUser(req.user), user: req.user })
 })
 
 router.get('/auth/user', (req, res, next) => {

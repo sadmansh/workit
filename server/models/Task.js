@@ -15,11 +15,11 @@ const TaskSchema = new Schema({
 		type: Date,
 		required: false,
 		default: null
-	}
+	},
 	_entry: {
 		type: Schema.Types.ObjectId,
 		ref: 'Entry'
-	}
+	},
 	_user: {
 		type: Schema.Types.ObjectId,
 		ref: 'User'

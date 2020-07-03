@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 
-const User = mongoose.model('users')
+const User = mongoose.model('User')
 const keys = require('../config/keys')
 
 passport.serializeUser((user, done) => {
