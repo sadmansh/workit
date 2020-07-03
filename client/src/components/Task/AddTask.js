@@ -19,8 +19,8 @@ const AddTask = props => {
 	}
 	const formHandler = e => {
 		e.preventDefault()
-		task.start = moment(task.start, 'HH:mm').format('X')
-		task.end = moment(task.end, 'HH:mm').format('X')
+		task.start = moment(task.start, 'HH:mm').format('x')
+		task.end = moment(task.end, 'HH:mm').format('x')
 		dispatch(actions.createTask(task))
 		e.target.reset()
 	}
