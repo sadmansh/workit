@@ -2,8 +2,8 @@ import axios from 'axios'
 import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK } from './types'
 import AuthHeaders from '../utils/AuthHeaders'
 
-export const fetchTasks = () => async dispatch => {
-	const res = await axios.get('http://localhost:5000/api/tasks', AuthHeaders)
+export const fetchTasks = entry => async dispatch => {
+	const res = await axios.get('http://localhost:5000/api/tasks', { params: { entry }, ...AuthHeaders })
 	dispatch({ type: FETCH_TASKS, payload: res.data })
 }
 

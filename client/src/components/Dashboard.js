@@ -4,6 +4,7 @@ import * as actions from '../actions'
 
 import SignIn from './Entry/SignIn'
 import AddTask from './Task/AddTask'
+import TasksList from './Task/TasksList'
 // import SignOut from './Entry/SignOut'
 
 const Dashboard = () => {
@@ -24,7 +25,10 @@ const Dashboard = () => {
 			<SignIn entries={entries} setEntry={setEntry} />
 
 			{entry.length ? 
-				<AddTask entry={entry} />
+				<div className="tasks">
+					<AddTask entry={entry} />
+					<TasksList entry={entry} />
+				</div>
 				: ''
 			}
 		</div>
