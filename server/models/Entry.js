@@ -4,7 +4,7 @@ const { Schema } = mongoose
 const EntrySchema = new Schema({
 	signIn: {
 		type: Date,
-		required: true,
+		required: false,
 		default: Date.now()
 	},
 	signOut: {
@@ -12,8 +12,10 @@ const EntrySchema = new Schema({
 		required: false,
 		default: null
 	}
-}, {
-	timestamps: true
+	_user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}
 })
 
 mongoose.model('Entry', EntrySchema)
