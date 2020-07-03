@@ -17,7 +17,10 @@ const SignOut = props => {
 				let signInDate = moment(entry.signIn)
 				if (signInDate.isSame(moment(Date.now()), 'day')) {
 					setId(entry._id)
-					if (entry.signOut) setStop(entry.signOut)
+					if (entry.signOut) {
+						setStop(entry.signOut)
+						props.setSignedOut(true)
+					}
 				}
 			})
 		}

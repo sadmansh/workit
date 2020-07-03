@@ -6,10 +6,10 @@ import SignIn from './Entry/SignIn'
 import SignOut from './Entry/SignOut'
 import AddTask from './Task/AddTask'
 import TasksList from './Task/TasksList'
-// import SignOut from './Entry/SignOut'
 
 const Dashboard = () => {
 	const [entry, setEntry] = useState('')
+	const [signedOut, setSignedOut] = useState(false)
 
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(actions.fetchEntries())
-	}, [dispatch])
+	}, [dispatch, signedOut])
 
 	return (
 		<div>
@@ -27,8 +27,10 @@ const Dashboard = () => {
 
 			{entry.length && entries.length ? 
 				<div className="tasks">
-					<AddTask entry={entry} />
-					<SignOut entries={entries} />
+					{!signedOut ? 
+						<AddTask entry={entry} /> : ''
+					}
+					<SignOut entries={entries} setSignedOut={setSignedOut} />
 					<TasksList entry={entry} />
 				</div>
 				: ''
