@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
+import moment from 'moment'
 
 const AddTask = props => {
 
@@ -18,7 +19,8 @@ const AddTask = props => {
 	}
 	const formHandler = e => {
 		e.preventDefault()
-		console.log(task)
+		task.start = moment(task.start, 'HH:mm').format('X')
+		task.end = moment(task.end, 'HH:mm').format('X')
 		dispatch(actions.createTask(task))
 		e.target.reset()
 	}

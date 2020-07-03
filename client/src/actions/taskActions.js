@@ -7,9 +7,9 @@ export const fetchTasks = () => async dispatch => {
 	dispatch({ type: FETCH_TASKS, payload: res.data })
 }
 
-export const createTask = signIn => async dispatch => {
+export const createTask = task => async dispatch => {
 	try {
-		const res = await axios.post('http://localhost:5000/api/tasks/add', { signIn }, AuthHeaders)
+		const res = await axios.post('http://localhost:5000/api/tasks/add', task, AuthHeaders)
 		dispatch({ type: CREATE_TASK, payload: res.data })
 	} catch (error) {
 		console.error(error)
