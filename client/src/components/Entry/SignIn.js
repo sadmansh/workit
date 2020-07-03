@@ -14,14 +14,16 @@ const SignIn = props => {
 		if (entries) {
 			entries.forEach(entry => {
 				let date = moment(entry.signIn)
-				if (date.isSame(moment(Date.now()), 'day')) setStart(entry.signIn)
+				if (date.isSame(moment(Date.now()), 'day')) {
+					setStart(entry.signIn)
+					props.setSignedIn(true)
+				}
 			})
 		}
 	}, [props])
 
 	const startEntry = () => {
 		dispatch(actions.createEntry(Date.now()))
-		props.setSignedIn(true)
 	}
 	return (
 		<div>

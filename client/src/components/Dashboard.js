@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../actions'
 
 import SignIn from './Entry/SignIn'
+import AddTask from './Task/AddTask'
 // import SignOut from './Entry/SignOut'
 
 const Dashboard = () => {
@@ -23,7 +24,7 @@ const Dashboard = () => {
 			<SignIn entries={entries} setSignedIn={setSignedIn} />
 
 			{signedIn ? 
-				<div>Add task</div>
+				<AddTask />
 				: ''
 			}
 		</div>
