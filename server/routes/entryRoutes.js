@@ -9,7 +9,8 @@ router.post('/entries/add', passport.authenticate('jwt', { session: false }), as
 		const entry = req.body
 		const newEntry = await new Entry({
 			signIn: entry.signIn,
-			signOut: entry.signOut
+			signOut: entry.signOut,
+			_user: req.user.id
 		}).save()
 		return res.send(newEntry)
 	} catch (error) {
