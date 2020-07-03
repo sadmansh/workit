@@ -16,7 +16,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 
 const app = express()
 app.use(cors({
-	methods: ['POST', 'GET'],
+	methods: ['POST', 'GET', 'PUT', 'DELETE'],
 	credentials: true
 }))
 app.use(morgan('dev'))
