@@ -5,12 +5,8 @@ import moment from 'moment'
 
 const TasksList = props => {
 	const dispatch = useDispatch()
-	const { tasks } = useSelector(state => state)
-
-	useEffect(() => {
-		dispatch(actions.fetchTasks(props.entry))
-	}, [dispatch])
-
+	const { tasks } = props
+	
 	return (
 		<div className="all-tasks">
 			<h2>Today's tasks</h2>

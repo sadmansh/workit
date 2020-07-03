@@ -14,11 +14,12 @@ const Dashboard = () => {
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
 
-	const { entries } = useSelector(state => state)
+	const { entries, tasks } = useSelector(state => state)
 
 	useEffect(() => {
 		dispatch(actions.fetchEntries())
-	}, [dispatch, signedOut])
+		if (entry && entry.length) dispatch(actions.fetchTasks(entry))
+	}, [dispatch, signedOut, entry])
 
 	return (
 		<div>
@@ -31,7 +32,7 @@ const Dashboard = () => {
 						<AddTask entry={entry} /> : ''
 					}
 					<SignOut entries={entries} setSignedOut={setSignedOut} />
-					<TasksList entry={entry} />
+					<TasksList tasks={tasks} entry={entry} />
 				</div>
 				: ''
 			}
