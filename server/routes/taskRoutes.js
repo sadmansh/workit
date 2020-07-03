@@ -7,11 +7,7 @@ const Task = mongoose.model('Task')
 router.post('/tasks/add', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 	try {
 		const task = req.body
-		const newTask = await new Task({
-			start: task.start,
-			details: task.details,
-			end: task.end
-		}).save()
+		const newTask = await new Task({ ...task, _user: req.user.id }).save()
 		return res.send(newTask)
 	} catch (error) {
 		console.error(error)
