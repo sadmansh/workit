@@ -15,9 +15,6 @@ const Dashboard = () => {
 	// True when sign out button clicked
 	const [signedOut, setSignedOut] = useState(false)
 
-	// False when there's at least one task without end time
-	const [tasksCompleteFlag, setTasksCompleteFlag] = useState(true)
-
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
 
@@ -26,11 +23,6 @@ const Dashboard = () => {
 	useEffect(() => {
 		dispatch(actions.fetchEntries())
 		if (entry && entry.length) dispatch(actions.fetchTasks(entry))
-		if (tasks && tasks.length) {
-			tasks.forEach(task => {
-				if (!moment(task.end)._isValid) return setTasksCompleteFlag(false)
-			})
-		}
 	}, [dispatch, signedOut, entry])
 
 	return (
@@ -42,7 +34,8 @@ const Dashboard = () => {
 					{entry.length && entries.length ? 
 						<div className="add-task-container">
 								{!signedOut ? <AddTask entry={entry} /> : ''}
-								{tasksCompleteFlag ? <SignOut entries={entries} setSignedOut={setSignedOut} /> : ''}
+								<SignOut entries={entries} setSignedOut={setSignedOut} />
+								{!signedOut ? <p className="sign-out-note">Please make sure there is no incomplete task before you sign out, otherwise there's a bug that I haven't fixed yet.</p>: ''}
 						</div>
 						: ''
 					}
