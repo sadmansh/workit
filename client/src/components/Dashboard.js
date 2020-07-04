@@ -18,15 +18,6 @@ const Dashboard = () => {
 	// False when there's at least one task without end time
 	const [tasksCompleteFlag, setTasksCompleteFlag] = useState(true)
 
-	// State objects for task editing
-	const [editing, setEditing] = useState(false)
-	const [currentTask, setCurrentTask] = useState({
-		id: '',
-		start: '',
-		end: '',
-		details: ''
-	})
-
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
 
@@ -58,7 +49,7 @@ const Dashboard = () => {
 				</div>
 				<div className="flex-small">
 					{entry.length && entries.length ? 
-							<TasksList tasks={tasks} entry={entry} setEditing={setEditing} setCurrentTask={setCurrentTask} />
+							<TasksList tasks={tasks} />
 						: ''
 					}
 				</div>
