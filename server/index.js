@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const morgan = require('morgan')
-const cors = require('cors')
+// const cors = require('cors')
 
 
 const keys = require('./config/keys')
@@ -15,11 +15,11 @@ require('./services/passport')
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const app = express()
-app.use(cors({
-	origin: ['http://localhost:3000', 'https://workit.mayeeshasam.com'],
-	methods: ['POST', 'GET', 'PUT', 'DELETE'],
-	credentials: true
-}))
+// app.use(cors({
+// 	origin: ['http://localhost:3000', 'https://workit.mayeeshasam.com'],
+// 	methods: ['POST', 'GET', 'PUT', 'DELETE'],
+// 	credentials: true
+// }))
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
