@@ -7,6 +7,7 @@ window.moment = moment
 
 const SignIn = props => {
 	const [start, setStart] = useState('')
+	const [manualSignIn, setManualSiginIn] = useState(0)
 	const { entries } = props
 	const dispatch = useDispatch()
 
@@ -22,13 +23,27 @@ const SignIn = props => {
 		}
 	}, [props])
 
-	const startEntry = () => {
-		dispatch(actions.createEntry(Date.now()))
+	const handleChange = e => {
+		setManualSiginIn(parseInt(moment(e.target.value, 'HH:mm').format('x')))
+	}
+
+	const startEntry = time => {
+		dispatch(actions.createEntry(time || Date.now()))
 	}
 	return (
 		<div>
 			{!start ? 
-				<button className="sign-in" onClick={startEntry}>Sign In</button>
+				<div className="sign-in">
+					<button className="sign-in-button" onClick={startEntry}>Sign In</button>
+					<span className="sign-in-manually" onClick={() => setManualSiginIn(1)}>Enter sign in time manually</span>
+					{manualSignIn ? 
+						<div className="manual-sign-in">
+							<input type="time" onChange={handleChange} />
+							<button onClick={() => startEntry(manualSignIn)}>Sign in manually</button>
+						</div>
+						: ''
+					}
+				</div>
 				:
 				<div>Signed in at {moment(start).format('hh:mm A')}</div>
 			}
