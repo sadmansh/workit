@@ -6,7 +6,7 @@ export default function(state = null, action) {
 			return action.payload
 
 		case CREATE_TASK:
-			return [action.payload, ...state]
+			return [...state, action.payload]
 		
 		case UPDATE_TASK:
 			return state.map(task => { return task._id === action.payload._id ? action.payload : task })
