@@ -8,7 +8,7 @@ window.moment = moment
 const SignIn = props => {
 	const [start, setStart] = useState('')
 	const [manualSignIn, setManualSiginIn] = useState(0)
-	const { entries } = props
+	const { entries, setEntry } = props
 	const dispatch = useDispatch()
 
 	useEffect(() =>{
@@ -17,24 +17,24 @@ const SignIn = props => {
 				let date = moment(entry.signIn)
 				if (date.isSame(moment(Date.now()), 'day')) {
 					setStart(entry.signIn)
-					props.setEntry(entry._id)
+					setEntry(entry._id)
 				}
 			})
 		}
-	}, [props])
+	}, [entries])
 
 	const handleChange = e => {
 		setManualSiginIn(parseInt(moment(e.target.value, 'HH:mm').format('x')))
 	}
 
 	const startEntry = time => {
-		dispatch(actions.createEntry(time || Date.now()))
+		dispatch(actions.createEntry(time))
 	}
 	return (
 		<div>
 			{!start ? 
 				<div className="sign-in">
-					<button className="sign-in-button" onClick={startEntry}>Sign In</button>
+					<button className="sign-in-button" onClick={() => startEntry(Date.now())}>Sign In</button>
 					<span className="sign-in-manually" onClick={() => setManualSiginIn(1)}>Enter sign in time manually</span>
 					{manualSignIn ? 
 						<div className="manual-sign-in">

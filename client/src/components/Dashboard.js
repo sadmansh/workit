@@ -11,8 +11,21 @@ import Report from './Report/Report'
 
 const Dashboard = () => {
 	const [entry, setEntry] = useState('')
+
+	// True when sign out button clicked
 	const [signedOut, setSignedOut] = useState(false)
+
+	// False when there's at least one task without end time
 	const [tasksCompleteFlag, setTasksCompleteFlag] = useState(true)
+
+	// State objects for task editing
+	const [editing, setEditing] = useState(false)
+	const [currentTask, setCurrentTask] = useState({
+		id: '',
+		start: '',
+		end: '',
+		details: ''
+	})
 
 	const { user } = useSelector(state => state)
 	const dispatch = useDispatch()
@@ -37,15 +50,15 @@ const Dashboard = () => {
 					<SignIn entries={entries} setEntry={setEntry} />
 					{entry.length && entries.length ? 
 						<div className="add-task-container">
-								<AddTask entry={entry} />
-								{!signedOut && tasksCompleteFlag ? <SignOut entries={entries} setSignedOut={setSignedOut} /> : ''}
+								{!signedOut ? <AddTask entry={entry} /> : ''}
+								{tasksCompleteFlag ? <SignOut entries={entries} setSignedOut={setSignedOut} /> : ''}
 						</div>
 						: ''
 					}
 				</div>
 				<div className="flex-small">
 					{entry.length && entries.length ? 
-							<TasksList tasks={tasks} entry={entry} />
+							<TasksList tasks={tasks} entry={entry} setEditing={setEditing} setCurrentTask={setCurrentTask} />
 						: ''
 					}
 				</div>

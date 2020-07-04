@@ -18,7 +18,7 @@ router.post('/tasks/add', passport.authenticate('jwt', { session: false }), asyn
 router.get('/tasks', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 	try {
 		const tasks = await Task.find({ _entry: req.query.entry, _user: req.user.id })
-		return res.send(tasks.reverse())
+		return res.send(tasks)
 	} catch (error) {
 		console.error(error)
 		return res.status(200).send({ error: error.message })

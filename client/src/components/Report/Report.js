@@ -50,7 +50,7 @@ const Report = props => {
 		if (tasks && tasks.length) {
 			return (
 				<ul className="report-tasks">
-					{tasks.reverse().map(task => (
+					{tasks.map(task => (
 						<li key={task._id}>{getTime(task.start)}{task.end ? ' - ' + getTime(task.end) : ''} &mdash; {task.details} [{getHours(task)}]</li>
 					))}
 				</ul>
