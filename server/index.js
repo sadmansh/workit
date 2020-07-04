@@ -16,6 +16,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 
 const app = express()
 app.use(cors({
+	origin: ['http://localhost:3000', 'https://workit.mayeeshasam.com'],
 	methods: ['POST', 'GET', 'PUT', 'DELETE'],
 	credentials: true
 }))
