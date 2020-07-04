@@ -35,7 +35,7 @@ const Dashboard = () => {
 					<SignOut entries={entries} setSignedOut={setSignedOut} />
 					<TasksList tasks={tasks} entry={entry} />
 
-					<Report tasks={tasks} entry={entries.find(ent => ent._id === entry)} />
+					<Report signedOut={signedOut} tasks={tasks} entry={entries.find(ent => ent._id === entry)} />
 				</div>
 				: ''
 			}

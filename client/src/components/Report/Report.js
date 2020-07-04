@@ -9,10 +9,10 @@ const Report = props => {
 		work: '',
 		total: ''
 	})
-	const { entry, tasks } = props
+	const { entry, tasks, signedOut } = props
 
 	useEffect(() => {
-		if (tasks && tasks.length) {
+		if (tasks && tasks.length && signedOut) {
 			let breakMins = 0
 			let workMins = 0
 			tasks.forEach(task => {
@@ -32,11 +32,14 @@ const Report = props => {
 	const getHours = ({ start, end }, getDuration = false) => {
 		start = moment(start)
 		end = moment(end)
-		const duration = moment.duration(end.diff(start))
-		const hours = parseInt(duration.asHours())
-		const mins = parseInt(duration.asMinutes()) % 60
-		if (getDuration) return duration
-		return `${hours}h ${mins}m`
+		if (start._isValid && end._isValid) {
+			const duration = moment.duration(end.diff(start))
+			const hours = parseInt(duration.asHours())
+			const mins = parseInt(duration.asMinutes()) % 60
+			if (getDuration) return duration
+			return `${hours}h ${mins}m`
+		}
+		return 'Task not complete'
 	}
 
 	const getTime = (time) => {
@@ -48,7 +51,7 @@ const Report = props => {
 			return (
 				<ul className="report-tasks">
 					{tasks.reverse().map(task => (
-						<li key={task._id}>{getTime(task.start)} - {getTime(task.end)} &mdash; {task.details} [{getHours(task)}]</li>
+						<li key={task._id}>{getTime(task.start)}{task.end ? ' - ' + getTime(task.end) : ''} &mdash; {task.details} [{getHours(task)}]</li>
 					))}
 				</ul>
 			)

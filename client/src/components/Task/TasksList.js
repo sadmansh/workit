@@ -14,7 +14,12 @@ const TasksList = props => {
 				{tasks && tasks.length ? 
 					tasks.map(task => 
 						<li key={task._id}>
-							<span className="task-times">From {moment(task.start).format('hh:mm A')} to {moment(task.end).format('hh:mm A')}</span>
+							<div className="task-meta">
+								<span className="task-from">From {moment(task.start).format('hh:mm A')}</span>
+								{task.end ? 
+									<span className="task-from"> to {moment(task.end).format('hh:mm A')}</span> : ''
+								}
+							</div>
 							<div className="task-details">{task.details}</div>
 						</li>
 					)
