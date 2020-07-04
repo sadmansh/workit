@@ -15,12 +15,19 @@ require('./services/passport')
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const app = express()
-app.use(cors())
-// app.use(cors({
-// 	origin: ['http://localhost:3000', 'https://workit.mayeeshasam.com'],
-// 	methods: ['POST', 'GET', 'PUT', 'DELETE'],
-// 	credentials: true
-// }))
+const whitelist = ['http://localhost:3000', 'https://workit.mayeeshasam.com']
+app.use(cors({
+	origin: function(origin, callback) {
+		if(!origin) return callback(null, true)
+		if(whitelist.indexOf(origin) === -1) {
+			let msg = 'The CORS policy for this site does not allow access from the specified origin: ' + origin
+			return callback(new Error(msg), false)
+		}
+		return callback(null, true)	
+	},
+	methods: ['POST', 'GET', 'PUT', 'DELETE'],
+	credentials: true
+}))
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
