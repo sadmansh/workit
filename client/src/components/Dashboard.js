@@ -6,6 +6,7 @@ import SignIn from './Entry/SignIn'
 import SignOut from './Entry/SignOut'
 import AddTask from './Task/AddTask'
 import TasksList from './Task/TasksList'
+import Report from './Report/Report'
 
 const Dashboard = () => {
 	const [entry, setEntry] = useState('')
@@ -33,6 +34,8 @@ const Dashboard = () => {
 					}
 					<SignOut entries={entries} setSignedOut={setSignedOut} />
 					<TasksList tasks={tasks} entry={entry} />
+
+					<Report tasks={tasks} entry={entries.find(ent => ent._id === entry)} />
 				</div>
 				: ''
 			}
