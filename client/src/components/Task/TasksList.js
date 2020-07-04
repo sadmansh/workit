@@ -6,6 +6,10 @@ import moment from 'moment'
 const TasksList = props => {
 	const dispatch = useDispatch()
 	const { tasks } = props
+
+	const deleteTask = id => {
+		dispatch(actions.deleteTask(id))
+	}
 	
 	return (
 		<div className="all-tasks">
@@ -28,7 +32,7 @@ const TasksList = props => {
 								<td>{task.details}</td>
 								<td>
 									<button className="button muted-button">Edit</button>
-									<button className="button muted-button">Delete</button>
+									<button className="button muted-button" onClick={() => deleteTask(task._id)}>Delete</button>
 								</td>
 							</tr>
 						)
