@@ -10,6 +10,7 @@ const Dashboard = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		document.body.classList.add('dash')
 		dispatch(actions.fetchEntries())
 	}, [dispatch])
 

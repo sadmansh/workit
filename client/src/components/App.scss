@@ -7,8 +7,16 @@
 }
 
 body {
+	margin: 0;
 	font-family: 'Open Sans', sans-serif;
-	background-color: #e7e9f8;
+
+	&.dash {
+		background-color: #e7e9f8;
+	}
+}
+
+.landing-page {
+
 }
 
 input,
@@ -28,7 +36,8 @@ textarea {
 }
 
 .login,
-.register {
+.register,
+.landing-page {
 	position: relative;
 	top: -50%;
 	transform: translateY(50%);
@@ -64,14 +73,20 @@ textarea {
 	max-width: 100%;
 }
 
-button {
+button,
+.button {
 	display: inline-block;
 	padding: .75rem 1.5rem;
 	border-radius: 4px;
 	border: none;
 	background-color: #0063fe;
 	color: #fff;
+	text-decoration: none;
 	cursor: pointer;
+}
+
+a {
+	color: #0063fc;
 }
 
 .dashboard {
@@ -160,8 +175,9 @@ button {
 	}
 
 	li {
+		position: relative;
 		display: block;
-		padding: 1rem;
+		padding: 2rem;
 		margin: 1rem 0;
 		list-style: none;
 		background-image: linear-gradient(to right, #43d2c5, #8b7dff);
@@ -170,14 +186,36 @@ button {
 		font-weight: 600;
 		text-align: left;
 
-		.task-time {
-			margin: 0;
-			font-weight: 300;
+		input,
+		textarea {
+			background-color: transparent;
+			color: #fff;
+			border-color: #fff;
 		}
 
-		.task-details {
+		.task-time {
+			display: flex;
+			justify-content: space-between;
+			margin: 0;
+			font-weight: 300;
+
+			input {
+				flex-basis: 48%;
+				margin: .5rem 0;
+				max-width: 100%;
+			}
+		}
+
+		.task-details h4 {
 			margin: .5rem 0 0 0;
 			font-weight: 400;
+		}
+
+		.edit-icon {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			cursor: pointer;
 		}
 	}
 }

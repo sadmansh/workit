@@ -25,7 +25,7 @@ const Register = props => {
 	return (
 		<div className="register">
 			<h1 className="site-title">workit</h1>
-			<form onSubmit={handleSubmit} autocomplete="off">
+			<form onSubmit={handleSubmit}>
 				<input type="text" name="firstName" placeholder="First name" onChange={handleChange} />
 				<input type="text" name="lastName" placeholder="Last name" onChange={handleChange} />
 				<input type="email" name="email" placeholder="Email address" onChange={handleChange} />

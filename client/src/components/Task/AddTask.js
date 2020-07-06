@@ -35,16 +35,16 @@ const AddTask = props => {
 				<form onSubmit={formHandler} className="add-task">
 					<div className="task-meta">
 						<div className="form-control">
-							<label for="start">Start time</label>
+							<label htmlFor="start">Start time</label>
 							<input type="time" name="start" id="start" onChange={inputHandler} />
 						</div>
 						<div className="form-control">
-							<label for="end">End time</label>
+							<label htmlFor="end">End time</label>
 							<input type="time" name="end" id="end" onChange={inputHandler} />
 						</div>
 					</div>
 					<div>
-						<label for="details">Details</label>
+						<label htmlFor="details">Details</label>
 						<textarea name="details" id="details" onChange={inputHandler} />
 					</div>
 					<button type="submit">Add task</button>
