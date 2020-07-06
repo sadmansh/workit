@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../actions'
 import moment from 'moment'
 
 const Report = props => {
@@ -9,10 +8,11 @@ const Report = props => {
 		work: '',
 		total: ''
 	})
-	const { entry, tasks, signedOut } = props
-
+	const { entry } = props
+	const { tasks } = useSelector(state => state)
+	
 	useEffect(() => {
-		if (tasks && tasks.length && signedOut) {
+		if (tasks && tasks.length && entry.signOut) {
 			let breakMins = 0
 			let workMins = 0
 			tasks.forEach(task => {
@@ -27,7 +27,11 @@ const Report = props => {
 				total: `${Math.floor((workMins + breakMins) / 60)}h ${(workMins + breakMins) % 60}m`
 			})
 		}
-	}, [entry, tasks])
+	}, [entry])
+
+	const getTime = time => {
+		return moment(time).format('h:mma')
+	}
 
 	const getHours = ({ start, end }, getDuration = false) => {
 		start = moment(start)
@@ -40,10 +44,6 @@ const Report = props => {
 			return `${hours}h ${mins}m`
 		}
 		return 'Task not complete'
-	}
-
-	const getTime = (time) => {
-		return moment(time).format('h:mma')
 	}
 
 	const renderTasks = () => {
@@ -59,28 +59,19 @@ const Report = props => {
 	}
 
 	return (
-		<div>
-			<h2>Report</h2>
-			<hr />
-			<div className="report-box">
-				<h3 style={{ textTransform: 'uppercase' }}>
-					{moment(Date.now()).format('dddd')}'s ({moment(Date.now()).format('D.M.YYYY')}) work updates
-				</h3>
-				<p className="sign-in-time">
-					{getTime(entry.signIn)} &mdash; SIGNED IN
-				</p>
-				{renderTasks()}
-				{entry.signOut ? 
-					<div className="report-footer">
-						<p className="sign-out-time">{getTime(entry.signOut)} &mdash; SIGNED OUT</p>
-						<p className="total-hours">Total hours worked = {hours.total}</p>
-						<p className="break-hours">Break = {hours.break}</p>
-						<p className="work-hours">Total hours worked without break = {hours.work}</p>
-					</div>
-					: ''
-				}
-				
-			</div>
+		<div className="report">
+			<h2>{moment(Date.now()).format('dddd')}'s ({moment(Date.now()).format('D.M.YYYY')}) work updates</h2>
+			<h3 className="sign-in-time">{getTime(entry.signIn)} &mdash; SIGNED IN</h3>
+			{renderTasks()}
+			{entry.signOut ? 
+				<div className="report-footer">
+					<h3 className="sign-out-time">{getTime(entry.signOut)} &mdash; SIGNED OUT</h3>
+					<h4 className="total-hours">Total hours worked = {hours.total}</h4>
+					<h4 className="break-hours">Break = {hours.break}</h4>
+					<h4 className="work-hours">Total hours worked without break = {hours.work}</h4>
+				</div>
+				: ''
+			}
 		</div>
 	)
 }

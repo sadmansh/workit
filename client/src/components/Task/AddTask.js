@@ -4,12 +4,12 @@ import * as actions from '../../actions'
 import moment from 'moment'
 
 const AddTask = props => {
-
+	const { entry } = props
 	const [task, setTask] = useState({
 		start: '',
 		end: '',
 		details: '',
-		_entry: props.entry
+		_entry: entry
 	})
 
 	const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const AddTask = props => {
 	}
 
 	return (
-		<form onSubmit={formHandler} className="task-form">
+		<form onSubmit={formHandler} className="add-task">
 			<div className="task-meta">
 				<input type="time" name="start" onChange={inputHandler} />
 				<input type="time" name="end" onChange={inputHandler} />
