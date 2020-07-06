@@ -9,7 +9,7 @@ const TaskSchema = new Schema({
 	start: {
 		type: Date,
 		required: false,
-		default: Date.now()
+		default: null
 	},
 	end: {
 		type: Date,
