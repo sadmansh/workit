@@ -14,7 +14,7 @@ export const createTask = task => async dispatch => {
 		if (task.end) payload.end = task.end
 		if (task.details) payload.details = task.details
 		if (task._entry) payload._entry = task._entry
-		const res = await axios.post('http://localhost:5000/api/tasks/add', payload, AuthHeaders)
+		const res = await axios.post(`${process.env.API_URL || 'http://localhost:5000'}/api/tasks/add`, payload, AuthHeaders)
 		dispatch({ type: CREATE_TASK, payload: res.data })
 	} catch (error) {
 		console.error(error)
@@ -23,7 +23,7 @@ export const createTask = task => async dispatch => {
 
 export const updateTask = (id, payload) => async dispatch => {
 	try {
-		const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, payload, AuthHeaders)
+		const res = await axios.put(`${process.env.API_URL || 'http://localhost:5000'}/api/tasks/${id}`, payload, AuthHeaders)
 		dispatch({ type: UPDATE_TASK, payload: res.data })
 	} catch (error) {
 		console.error(error)
@@ -32,7 +32,7 @@ export const updateTask = (id, payload) => async dispatch => {
 
 export const deleteTask = id => async dispatch => {
 	try {
-		const res = await axios.delete(`http://localhost:5000/api/tasks/${id}`, AuthHeaders)
+		const res = await axios.delete(`${process.env.API_URL || 'http://localhost:5000'}/api/tasks/${id}`, AuthHeaders)
 		dispatch({ type: DELETE_TASK, payload: res.data })
 	} catch (error) {
 		console.error(error)
