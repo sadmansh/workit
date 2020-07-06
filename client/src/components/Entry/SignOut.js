@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
 import moment from 'moment'
 
-window.moment = moment
-
 const SignOut = props => {
-	const [id, setId] = useState('')
-	const [stop, setStop] = useState('')
-	const { entries } = props
+	const [manualSignOutFlag, setManualSignOutFlag] = useState(false)
+	const [manualSignOutTime, setManualSignOutTime] = useState('')
+	const { tasks } = useSelector(state => state)
+	const { entry } = props
 	const dispatch = useDispatch()
 
-	useEffect(() =>{
-		if (entries) {
-			entries.forEach(entry => {
-				let signInDate = moment(entry.signIn)
-				if (signInDate.isSame(moment(Date.now()), 'day')) {
-					setId(entry._id)
-					if (entry.signOut) {
-						setStop(entry.signOut)
-						props.setSignedOut(true)
-					}
-				}
-			})
+	const signOut = time => {
+		const allTasksComplete = tasks.some(task => task.end && task.end.length)
+		if (allTasksComplete) {
+			dispatch(actions.updateEntry(entry._id, { signOut: time }))
+		} else {
+			alert('Please complete all tasks before signing out.')
 		}
-	}, [props])
-
-	const stopEntry = () => {
-		let stopDate = Date.now()
-		setStop(stopDate)
-		dispatch(actions.updateEntry(id, { signOut: stopDate }))
 	}
+
 	return (
-		<div>
-			{!stop ? 
-				<button className="sign-out" onClick={stopEntry}>Sign Out</button>
-				:
-				<div>Signed out at {moment(stop).format('hh:mm A')}</div>
+		<div className="sign-out">
+			{entry ? 
+				!entry.signOut ? 
+					<div style={{ textAlign: 'center' }}>
+						<p>Done for the day? Click sign out</p>
+						<button onClick={() => signOut(Date.now())}>Sign out</button>
+						<div className="manual-sign-out">
+							<span onClick={() => setManualSignOutFlag(!manualSignOutFlag)} className="manual-entry-toggle">Or add sign out time manually</span>
+							{manualSignOutFlag ? 
+								<div>
+									<input type="time" onChange={(e) => setManualSignOutTime(moment(e.target.value, 'HH:mm').format('x'))} />
+									<button onClick={() => signOut(manualSignOutTime)}>Add manual sign out</button>
+								</div>
+								:
+								''
+							}
+						</div>
+					</div>
+					:
+					<p className="signed-out">Signed out at {moment(entry.signOut).format('hh:mm A')}</p>
+				: ''
 			}
 		</div>
 	)

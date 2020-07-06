@@ -1,86 +1,67 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../actions'
 import moment from 'moment'
+import { PencilIcon } from '@primer/octicons-react'
+
+import * as actions from '../../actions'
 
 const TasksList = props => {
-
 	const [editing, setEditing] = useState('')
 	const [currentTask, setCurrentTask] = useState({})
-	
-	const dispatch = useDispatch()
 	const { tasks } = props
 
-	const deleteTask = id => {
-		dispatch(actions.deleteTask(id))
-	}
+	const dispatch = useDispatch()
 
-	const editRow = task => {
+	const setEditTask = task => {
 		if (editing !== task._id) {
 			setEditing(task._id)
 			setCurrentTask(task)
+		} else {
+			setEditing('')
+			setCurrentTask({})
 		}
-		else {
-			dispatch(actions.updateTask(task._id, currentTask)).then(res => setEditing(''))
-		}
-		
+	}
+
+	const editTask = () => {
+		dispatch(actions.updateTask(editing, currentTask)).then(res => setEditing(''))
 	}
 
 	const editChangeHandler = e => {
 		if (e.target.name == 'start' || e.target.name == 'end') setCurrentTask({ ...currentTask, [e.target.name]: new Date(parseInt(moment(e.target.value, 'HH:mm').format('x'))).toISOString()})
 		else setCurrentTask({ ...currentTask, [e.target.name]: e.target.value })
 	}
-	
+
 	return (
-		<div className="all-tasks">
-			<h2>Today's tasks</h2>
-			<table className="tasks-list">
-				<thead>
-					<tr>
-						<th>Start</th>
-						<th>End</th>
-						<th>Details</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{tasks && tasks.length ? 
-						tasks.map(task => 
-							<tr key={task._id}>
-								<td>
-									{editing === task._id ? 
-										<input type="time" name="start" value={moment(currentTask.start).format('HH:mm')} onChange={editChangeHandler} />
-										:
-										moment(task.start).format('hh:mm A')
-									}
-								</td>
-								<td>
-									{editing === task._id ? 
-										<input type="time" name="end" value={moment(currentTask.end).format('HH:mm')} onChange={editChangeHandler} />
-										:
-										task.end ? moment(task.end).format('hh:mm A') : 'Incomplete'
-									}
-								</td>
-								<td>
-									{editing === task._id ? 
-										<textarea name="details" value={task.details} onChange={editChangeHandler}></textarea>
-										:
-										task.details ? task.details : ''
-									}
-								</td>
-								<td>
-									<button className="button muted-button" onClick={() => editRow(task)}>{editing === task._id ? 'Save' : 'Edit'}</button>
-									<button className="button muted-button" onClick={() => deleteTask(task._id)}>Delete</button>
-								</td>
-							</tr>
-						)
-						:
-						<tr>
-							<td colSpan={4}>No tasks</td>
-						</tr>
-					}
-				</tbody>
-			</table>
+		<div className="tasks-list">
+			{tasks && tasks.length ? 
+				<ul className="tasks">
+					{tasks.map(task => 
+						<li key={task._id}>
+							{editing === task._id ?
+								<div className="task-time">
+									<input type="time" name="start" value={moment(task.start).format('HH:mm')} onChange={editChangeHandler} />
+									<input type="time" name="end" value={moment(task.end).format('HH:mm')} onChange={editChangeHandler} />
+								</div>
+								:
+								<p className="task-time">{moment(task.start).format('hh:mm A')} - {moment(task.end).format('hh:mm A')}</p>
+							}
+							<div className="task-details">
+								{editing === task._id ? 
+									<textarea name="details" value={currentTask.details} onChange={editChangeHandler}></textarea>
+									:
+									task.details ? <h4>{task.details}</h4> : ''
+								}
+							</div>
+							{editing === task._id ? <button onClick={editTask}>Save</button> : ''}
+							<div className="edit-icon" onClick={() => setEditTask(task)}>
+								<PencilIcon size={16} />
+							</div>
+						</li>
+					)}
+				</ul>
+				:
+				<div>0 tasks today</div>
+			}
 		</div>
 	)
 }

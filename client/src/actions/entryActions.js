@@ -3,13 +3,13 @@ import { FETCH_ENTRIES, CREATE_ENTRY, UPDATE_ENTRY, DELETE_ENTRY } from './types
 import AuthHeaders from '../utils/AuthHeaders'
 
 export const fetchEntries = () => async dispatch => {
-	const res = await axios.get('https://ms-workit.herokuapp.com/api/entries', AuthHeaders)
+	const res = await axios.get(`https://ms-workit.herokuapp.com/api/entries`, AuthHeaders)
 	dispatch({ type: FETCH_ENTRIES, payload: res.data })
 }
 
 export const createEntry = signIn => async dispatch => {
 	try {
-		const res = await axios.post('https://ms-workit.herokuapp.com/api/entries/add', { signIn }, AuthHeaders)
+		const res = await axios.post(`https://ms-workit.herokuapp.com/api/entries/add`, { signIn }, AuthHeaders)
 		dispatch({ type: CREATE_ENTRY, payload: res.data })
 	} catch (error) {
 		console.error(error)

@@ -3,50 +3,30 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
 import moment from 'moment'
 
-window.moment = moment
-
-const SignIn = props => {
-	const [start, setStart] = useState('')
-	const [manualSignIn, setManualSiginIn] = useState(0)
-	const { entries, setEntry } = props
+const SignIn = () => {
+	const [manualSignInFlag, setManualSignInFlag] = useState(false)
+	const [manualSignInTime, setManualSignInTime] = useState('')
 	const dispatch = useDispatch()
-
-	useEffect(() =>{
-		if (entries) {
-			entries.forEach(entry => {
-				let date = moment(entry.signIn)
-				if (date.isSame(moment(Date.now()), 'day')) {
-					setStart(entry.signIn)
-					setEntry(entry._id)
-				}
-			})
-		}
-	}, [entries])
-
-	const handleChange = e => {
-		setManualSiginIn(parseInt(moment(e.target.value, 'HH:mm').format('x')))
-	}
-
-	const startEntry = time => {
+	
+	const signIn = time => {
 		dispatch(actions.createEntry(time))
 	}
+
 	return (
-		<div>
-			{!start ? 
-				<div className="sign-in">
-					<button className="sign-in-button" onClick={() => startEntry(Date.now())}>Sign In</button>
-					<span className="sign-in-manually" onClick={() => setManualSiginIn(1)}>Enter sign in time manually</span>
-					{manualSignIn ? 
-						<div className="manual-sign-in">
-							<input type="time" onChange={handleChange} />
-							<button onClick={() => startEntry(manualSignIn)}>Sign in manually</button>
-						</div>
-						: ''
-					}
-				</div>
-				:
-				<div>Signed in at {moment(start).format('hh:mm A')}</div>
-			}
+		<div className="sign-in" style={{ textAlign: 'center' }}>
+			<p>Start logging tasks by signing in first</p>
+			<button onClick={() => signIn(Date.now())}>Sign in</button>
+			<div className="manual-sign-in">
+				<span onClick={() => setManualSignInFlag(!manualSignInFlag)} className="manual-entry-toggle">or add sign in time manually</span>
+				{manualSignInFlag ? 
+					<div>
+						<input type="time" onChange={(e) => setManualSignInTime(moment(e.target.value, 'HH:mm').format('x'))} />
+						<button onClick={() => signIn(manualSignInTime)}>Sign in manually</button>
+					</div>
+					:
+					''
+				}
+			</div>
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as actions from '../../actions'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 const Login = props => {
 	const [user, setUser] = useState({
@@ -21,11 +21,13 @@ const Login = props => {
 	}
 
 	return (
-		<div>
+		<div className="login">
+			<h1 className="site-title">workit</h1>
 			<form onSubmit={handleSubmit}>
-				<input type="email" name="email" onChange={handleChange} />
-				<input type="password" name="password" onChange={handleChange} />
+				<input type="email" name="email" onChange={handleChange} placeholder="email@example.com" />
+				<input type="password" name="password" onChange={handleChange} placeholder="**********" />
 				<button type="submit">Login</button>
+				<Link to="/register" className="auth-alt-link">or sign up instead</Link>
 			</form>
 		</div>
 	)
