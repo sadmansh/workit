@@ -4,6 +4,7 @@ import moment from 'moment'
 
 import * as actions from '../../actions'
 import AddTask from './AddTask'
+import TasksList from './TasksList'
 
 const TodayTasks = props => {
 	const { entry } = props
@@ -18,18 +19,8 @@ const TodayTasks = props => {
 
 	return (
 		<div className="today-tasks">
-			<div className="tasks-list">
-				{entry && tasks && tasks.length ? 
-					<ul className="tasks">
-						{tasks.map(task => 
-							<li key={task._id}>{task.details}</li>
-						)}
-					</ul>
-					:
-					<div>Please add a task</div>
-				}
-			</div>
 			{!entry.signOut ? <AddTask entry={entry._id} /> : ''}
+			<TasksList tasks={tasks} />
 		</div>
 	)
 }

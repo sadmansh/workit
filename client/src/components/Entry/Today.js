@@ -29,8 +29,8 @@ const Today = props => {
 	return (
 		<div className="today">
 			{todayEntry && todayEntry.signIn ? 
-				<div>
-					<span className="signed-in">Signed in at {moment(todayEntry.signIn).format('hh:mma')}</span>
+				<div style={{ textAlign: 'center' }}>
+					<span className="signed-in">You signed in at {moment(todayEntry.signIn).format('hh:mm A')}</span>
 					<TodayTasks entry={todayEntry} />
 					<SignOut entry={todayEntry} />
 					<button onClick={() => setShowReport(!showReport)}>{showReport ? 'Hide report' : 'Show report'}</button>

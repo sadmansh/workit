@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	background-color: #e7e9f8;
+}
+
+input,
+textarea {
+	font-family: 'Open Sans', sans-serif;
+
+	&::placeholder {
+		font-family: 'Open Sans', sans-serif;
+	}
+}
+
+.site-title {
+	margin-top: 0;
+	text-align: center;
+	font-weight: 300;
+	font-size: 2rem;
+}
+
+.login,
+.register {
+	position: relative;
+	top: -50%;
+	transform: translateY(50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.auth-alt-link,
+.manual-entry-toggle {
+	display: block;
+	margin-top: 1rem;
+	font-size: .875rem;
+	color: #0063fe;
+}
+
+form {
+	text-align: center;
+}
+
+input,
+textarea {
+	display: block;
+	margin: 1rem auto;
+	padding: .75rem 1rem;
+	width: 100%;
+	max-width: 240px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+textarea {
+	max-width: 100%;
+}
+
+button {
+	display: inline-block;
+	padding: .75rem 1.5rem;
+	border-radius: 4px;
+	border: none;
+	background-color: #0063fe;
+	color: #fff;
+	cursor: pointer;
+}
+
+.dashboard {
+	padding: 2rem 1rem;
+}
+
+
+// Sign in, sign out
+
+.signed-in,
+.signed-out {
+	display: block;
+	margin: 1rem 0;
+	padding: 1rem;
+	background-image: linear-gradient(to right, #f0608f, #7367d3);
+	border-radius: 12px;
+	color: #fff;
+	font-weight: 600;
+	text-align: center;
+}
+
+
+// Tasks list
+
+.today-tasks {
+	margin: 2rem 0;
+}
+
+.tasks-list {
+	text-align: center;
+
+	li {
+		display: block;
+		list-style: none;
+	}
+}
+
+
+// Add task
+
+.add-task-wrapper {
+	margin-bottom: 1rem;
+
+	.toggle-add-task {
+		display: block;
+		width: 100%;
+		font-size: .875rem;
+	}
+
+	.task-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		input {
+			margin: 0;
+		}
+	}
+
+	.form-control {
+		width: 48%;
+	}
+
+	label {
+		display: block;
+		margin: .5rem 0 .25rem 0;
+		font-size: .75rem;
+		text-align: left;
+	}
+
+	textarea {
+		margin: 0 0 1rem 0;
+		width: 100%;
+		height: 100px;
+		resize: none;
+	}
+}
+
+
+// Tasks list
+
+.tasks-list {
+
+	.tasks {
+		padding: 0;
+	}
+
+	li {
+		display: block;
+		padding: 1rem;
+		margin: 1rem 0;
+		list-style: none;
+		background-image: linear-gradient(to right, #43d2c5, #8b7dff);
+		border-radius: 12px;
+		color: #fff;
+		font-weight: 600;
+		text-align: left;
+
+		.task-time {
+			margin: 0;
+			font-weight: 300;
+		}
+
+		.task-details {
+			margin: .5rem 0 0 0;
+			font-weight: 400;
+		}
+	}
+}

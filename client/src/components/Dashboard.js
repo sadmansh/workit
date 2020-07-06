@@ -16,7 +16,8 @@ const Dashboard = () => {
 	return (
 		<div className="dashboard">
 			<div className="header">
-				<h1>Hello {user.firstName}</h1>
+				<div className="hamburger"></div>
+				<h1 className="site-title">workit</h1>
 			</div>
 			<Today entries={entries} />
 		</div>

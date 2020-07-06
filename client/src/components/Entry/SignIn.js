@@ -13,14 +13,15 @@ const SignIn = () => {
 	}
 
 	return (
-		<div className="sign-in">
+		<div className="sign-in" style={{ textAlign: 'center' }}>
+			<p>Start logging tasks by signing in first</p>
 			<button onClick={() => signIn(Date.now())}>Sign in</button>
 			<div className="manual-sign-in">
-				<span onClick={() => setManualSignInFlag(true)}>Or add sign in time manually</span>
+				<span onClick={() => setManualSignInFlag(!manualSignInFlag)} className="manual-entry-toggle">or add sign in time manually</span>
 				{manualSignInFlag ? 
 					<div>
 						<input type="time" onChange={(e) => setManualSignInTime(moment(e.target.value, 'HH:mm').format('x'))} />
-						<button onClick={() => signIn(manualSignInTime)}>Add manual sign in</button>
+						<button onClick={() => signIn(manualSignInTime)}>Sign in manually</button>
 					</div>
 					:
 					''

@@ -20,13 +20,14 @@ const SignOut = props => {
 	}
 
 	return (
-		<div>
+		<div className="sign-out">
 			{entry ? 
 				!entry.signOut ? 
-					<div>
-					<button onClick={() => signOut(Date.now())}>Sign out</button>
+					<div style={{ textAlign: 'center' }}>
+						<p>Done for the day? Click sign out</p>
+						<button onClick={() => signOut(Date.now())}>Sign out</button>
 						<div className="manual-sign-out">
-							<span onClick={() => setManualSignOutFlag(true)}>Or add sign out time manually</span>
+							<span onClick={() => setManualSignOutFlag(!manualSignOutFlag)} className="manual-entry-toggle">Or add sign out time manually</span>
 							{manualSignOutFlag ? 
 								<div>
 									<input type="time" onChange={(e) => setManualSignOutTime(moment(e.target.value, 'HH:mm').format('x'))} />
@@ -38,7 +39,7 @@ const SignOut = props => {
 						</div>
 					</div>
 					:
-					<p>Signed out at {moment(entry.signOut).format('hh:mma')}</p>
+					<p className="signed-out">Signed out at {moment(entry.signOut).format('hh:mm A')}</p>
 				: ''
 			}
 		</div>

@@ -5,12 +5,14 @@ import moment from 'moment'
 
 const AddTask = props => {
 	const { entry } = props
+
 	const [task, setTask] = useState({
 		start: '',
 		end: '',
 		details: '',
 		_entry: entry
 	})
+	const [showForm, setShowForm] = useState(false)
 
 	const dispatch = useDispatch()
 
@@ -26,16 +28,29 @@ const AddTask = props => {
 	}
 
 	return (
-		<form onSubmit={formHandler} className="add-task">
-			<div className="task-meta">
-				<input type="time" name="start" onChange={inputHandler} />
-				<input type="time" name="end" onChange={inputHandler} />
-			</div>
-			<div>
-				<textarea name="details" onChange={inputHandler} />
-			</div>
-			<button type="submit">Add task</button>
-		</form>
+		<div className="add-task-wrapper">
+			<button onClick={() => setShowForm(!showForm)} className="toggle-add-task">+ Add task</button>
+
+			{showForm ?
+				<form onSubmit={formHandler} className="add-task">
+					<div className="task-meta">
+						<div className="form-control">
+							<label for="start">Start time</label>
+							<input type="time" name="start" id="start" onChange={inputHandler} />
+						</div>
+						<div className="form-control">
+							<label for="end">End time</label>
+							<input type="time" name="end" id="end" onChange={inputHandler} />
+						</div>
+					</div>
+					<div>
+						<label for="details">Details</label>
+						<textarea name="details" id="details" onChange={inputHandler} />
+					</div>
+					<button type="submit">Add task</button>
+				</form>
+				: ''}
+		</div>
 	)
 }
 

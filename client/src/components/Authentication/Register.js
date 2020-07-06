@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as actions from '../../actions'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 const Register = props => {
 	const [user, setUser] = useState({
@@ -23,13 +23,15 @@ const Register = props => {
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
+		<div className="register">
+			<h1 className="site-title">workit</h1>
+			<form onSubmit={handleSubmit} autocomplete="off">
 				<input type="text" name="firstName" placeholder="First name" onChange={handleChange} />
 				<input type="text" name="lastName" placeholder="Last name" onChange={handleChange} />
 				<input type="email" name="email" placeholder="Email address" onChange={handleChange} />
-				<input type="password" name="password" placeholder="Password" onChange={handleChange} />
+				<input type="password" name="password" id="password" placeholder="Password" onChange={handleChange} />
 				<button type="submit">Register</button>
+				<Link to="/login" className="auth-alt-link">or log in instead</Link>
 			</form>
 		</div>
 	)
