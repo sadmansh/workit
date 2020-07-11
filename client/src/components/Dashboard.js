@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import Today from './Entry/Today'
 
-const Dashboard = () => {
+const Dashboard = props => {
 	const { user, entries, tasks } = useSelector(state => state)
 	const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ const Dashboard = () => {
 				<div className="hamburger"></div>
 				<h1 className="site-title">workit</h1>
 			</div>
-			<Today entries={entries} />
+			<Today entries={entries} date={props.match.params.id} />
 		</div>
 	)
 
