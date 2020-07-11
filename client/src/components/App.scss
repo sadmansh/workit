@@ -81,6 +81,7 @@ button,
 	border: none;
 	background-color: #0063fe;
 	color: #fff;
+	font-size: .875rem;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -91,6 +92,23 @@ a {
 
 .dashboard {
 	padding: 2rem 1rem;
+}
+
+
+// Entry picker
+
+.entry-picker {
+	form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		input {
+			margin: 1rem;
+			width: auto;
+			max-width: auto;
+		}
+	}
 }
 
 

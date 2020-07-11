@@ -15,7 +15,7 @@ const TodayTasks = props => {
 		if (entry) {
 			dispatch(actions.fetchTasks(entry._id))
 		}
-	}, [dispatch])
+	}, [dispatch, entry])
 
 	return (
 		<div className="today-tasks">
