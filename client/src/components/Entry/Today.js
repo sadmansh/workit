@@ -30,14 +30,14 @@ const Today = props => {
 		<div className="today">
 			{todayEntry && todayEntry.signIn ? 
 				<div style={{ textAlign: 'center' }}>
-					<span className="signed-in">You signed in at {moment(todayEntry.signIn).format('hh:mm A')}</span>
+					<SignIn entry={todayEntry} />
 					<TodayTasks entry={todayEntry} />
 					<SignOut entry={todayEntry} />
 					<button onClick={() => setShowReport(!showReport)} style={{ marginTop: '1rem' }}>{showReport ? 'Hide report' : 'Show report'}</button>
 					{showReport ? <Report entry={todayEntry} /> : ''}
 				</div>
 				:
-				<SignIn />
+				''
 			}
 		</div>
 	)
