@@ -108,6 +108,40 @@ a {
 	text-align: center;
 }
 
+.sign-in {
+	position: relative;
+
+	&.editing {
+		background-image: linear-gradient(to right, #f0608f, #7367d3);
+		border-radius: 12px;
+	}
+
+	.editing-form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem 0;
+
+		input {
+			margin: 1rem;
+			width: auto;
+			max-width: auto;
+		}
+	}
+
+	.edit-icon {
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		transform: translateY(-50%);
+		cursor: pointer;
+
+		svg path {
+			fill: #fff;
+		}
+	}
+}
+
 
 // Tasks list
 
