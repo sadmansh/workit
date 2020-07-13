@@ -39,8 +39,8 @@ const TasksList = props => {
 						<li key={task._id}>
 							{editing === task._id ?
 								<div className="task-time">
-									<input type="time" name="start" value={moment(task.start).format('HH:mm')} onChange={editChangeHandler} />
-									<input type="time" name="end" value={moment(task.end).format('HH:mm')} onChange={editChangeHandler} />
+									<input type="time" name="start" value={moment(currentTask.start || task.start).format('HH:mm')} onChange={editChangeHandler} />
+									<input type="time" name="end" value={moment(currentTask.end || task.end).format('HH:mm')} onChange={editChangeHandler} />
 								</div>
 								:
 								<p className="task-time">{moment(task.start).format('hh:mm A')} - {moment(task.end).format('hh:mm A')}</p>
