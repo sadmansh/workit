@@ -20,7 +20,7 @@ const TodayTasks = props => {
 	return (
 		<div className="today-tasks">
 			{!entry.signOut ? <AddTask entry={entry._id} /> : ''}
-			<TasksList tasks={tasks} />
+			<TasksList tasks={tasks} entry={entry} />
 		</div>
 	)
 }
