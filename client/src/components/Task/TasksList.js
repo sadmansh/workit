@@ -8,7 +8,7 @@ import * as actions from '../../actions'
 const TasksList = props => {
 	const [editing, setEditing] = useState('')
 	const [currentTask, setCurrentTask] = useState({})
-	const { tasks } = props
+	const { tasks, entry } = props
 
 	const dispatch = useDispatch()
 
@@ -27,7 +27,8 @@ const TasksList = props => {
 	}
 
 	const editChangeHandler = e => {
-		if (e.target.name == 'start' || e.target.name == 'end') setCurrentTask({ ...currentTask, [e.target.name]: new Date(parseInt(moment(e.target.value, 'HH:mm').format('x'))).toISOString()})
+		const entryDate = moment(entry.signIn)
+		if (e.target.name == 'start' || e.target.name == 'end') setCurrentTask({ ...currentTask, [e.target.name]: new Date(parseInt(moment(e.target.value, 'HH:mm').date(entryDate.date()).month(entryDate.month()).year(entryDate.year()).format('x'))).toISOString()})
 		else setCurrentTask({ ...currentTask, [e.target.name]: e.target.value })
 	}
 
@@ -39,8 +40,8 @@ const TasksList = props => {
 						<li key={task._id}>
 							{editing === task._id ?
 								<div className="task-time">
-									<input type="time" name="start" value={moment(task.start).format('HH:mm')} onChange={editChangeHandler} />
-									<input type="time" name="end" value={moment(task.end).format('HH:mm')} onChange={editChangeHandler} />
+									<input type="time" name="start" value={moment(currentTask.start || task.start).format('HH:mm')} onChange={editChangeHandler} />
+									<input type="time" name="end" value={moment(currentTask.end || task.end).format('HH:mm')} onChange={editChangeHandler} />
 								</div>
 								:
 								<p className="task-time">{moment(task.start).format('hh:mm A')} - {moment(task.end).format('hh:mm A')}</p>

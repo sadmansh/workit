@@ -60,7 +60,7 @@ const Report = props => {
 
 	return (
 		<div className="report" style={{ textAlign: 'left' }}>
-			<h2>{moment(Date.now()).format('dddd')}'s ({moment(Date.now()).format('D.M.YYYY')}) work updates</h2>
+			<h2>{moment(entry.signIn).format('dddd')}'s ({moment(entry.signIn).format('D.M.YYYY')}) work updates</h2>
 			<h3 className="sign-in-time">{getTime(entry.signIn)} &mdash; SIGNED IN</h3>
 			{renderTasks()}
 			{entry.signOut ? 

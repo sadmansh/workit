@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
 import moment from 'moment'
 
+window.moment = moment
+
 const AddTask = props => {
 	const { entry } = props
 
@@ -21,8 +23,9 @@ const AddTask = props => {
 	}
 	const formHandler = e => {
 		e.preventDefault()
-		if (task.start) task.start = moment(task.start, 'HH:mm').format('x')
-		if (task.end) task.end = moment(task.end, 'HH:mm').format('x')
+		const entryDate = moment(entry.signIn)
+		if (task.start) task.start = moment(task.start, 'HH:mm').date(entryDate.date()).month(entryDate.month()).year(entryDate.year()).format('x')
+		if (task.end) task.end = moment(task.end, 'HH:mm').date(entryDate.date()).month(entryDate.month()).year(entryDate.year()).format('x')
 		dispatch(actions.createTask(task))
 		e.target.reset()
 	}
