@@ -16,6 +16,7 @@ const SignIn = props => {
 	}
 
 	const editChangeHandler = e => {
+		console.log(e.target.value)
 		setManualSignInTime(new Date(parseInt(moment(e.target.value, 'HH:mm').format('x'))).toISOString())
 	}
 
@@ -54,7 +55,7 @@ const SignIn = props => {
 						<span onClick={() => setManualSignInFlag(!manualSignInFlag)} className="manual-entry-toggle">or add sign in time manually</span>
 						{manualSignInFlag ? 
 							<div>
-								<input type="time" onChange={(e) => setManualSignInTime(moment(e.target.value, 'HH:mm').format('x'))} />
+								<input type="datetime-local" onChange={(e) => setManualSignInTime(moment(e.target.value, 'YYYY-MM-DDTHH:mm').format('x'))} />
 								<button onClick={() => signIn(manualSignInTime)}>Sign in manually</button>
 							</div>
 							:
