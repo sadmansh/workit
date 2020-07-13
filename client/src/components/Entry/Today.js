@@ -32,11 +32,11 @@ const Today = props => {
 	
 
 	return (
-		<div className="today">
+		<div className="today" style={{ textAlign: 'center' }}>
+			<EntryPicker entries={entries} />
+			<SignIn entry={todayEntry} />
 			{todayEntry && todayEntry.signIn ? 
-				<div style={{ textAlign: 'center' }}>
-					<EntryPicker entries={entries} />
-					<SignIn entry={todayEntry} />
+				<div>
 					<TodayTasks entry={todayEntry} />
 					<SignOut entry={todayEntry} />
 					<button onClick={() => setShowReport(!showReport)} style={{ marginTop: '1rem' }}>{showReport ? 'Hide report' : 'Show report'}</button>

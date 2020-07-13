@@ -45,22 +45,23 @@ const SignIn = props => {
 						</div>
 					</div>
 					:
-					<div style={{ textAlign: 'center' }}>
-						<p>Start logging tasks by signing in first</p>
-						<button onClick={() => signIn(Date.now())}>Sign in</button>
-						<div className="manual-sign-in">
-							<span onClick={() => setManualSignInFlag(!manualSignInFlag)} className="manual-entry-toggle">or add sign in time manually</span>
-							{manualSignInFlag ? 
-								<div>
-									<input type="time" onChange={(e) => setManualSignInTime(moment(e.target.value, 'HH:mm').format('x'))} />
-									<button onClick={() => signIn(manualSignInTime)}>Sign in manually</button>
-								</div>
-								:
-								''
-							}
-						</div>
+					''
+				:
+				<div style={{ textAlign: 'center' }}>
+					<p>Start logging tasks by signing in first</p>
+					<button onClick={() => signIn(Date.now())}>Sign in</button>
+					<div className="manual-sign-in">
+						<span onClick={() => setManualSignInFlag(!manualSignInFlag)} className="manual-entry-toggle">or add sign in time manually</span>
+						{manualSignInFlag ? 
+							<div>
+								<input type="time" onChange={(e) => setManualSignInTime(moment(e.target.value, 'HH:mm').format('x'))} />
+								<button onClick={() => signIn(manualSignInTime)}>Sign in manually</button>
+							</div>
+							:
+							''
+						}
 					</div>
-				: ''
+				</div>
 			}
 		</div>
 	)
