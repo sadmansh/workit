@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
-import { PencilIcon } from '@primer/octicons-react'
+import { PencilIcon, TrashIcon } from '@primer/octicons-react'
 
 import * as actions from '../../actions'
 
@@ -54,8 +54,13 @@ const TasksList = props => {
 								}
 							</div>
 							{editing === task._id ? <button onClick={editTask}>Save</button> : ''}
-							<div className="edit-icon" onClick={() => setEditTask(task)}>
-								<PencilIcon size={16} />
+							<div className="task-actions">
+								<div className="edit-icon" onClick={() => setEditTask(task)}>
+									<PencilIcon size={16} />
+								</div>
+								<div className="trash-icon" onClick={() => {if (window.confirm('Are you sure you want to delete this task?')) dispatch(actions.deleteTask(task._id))}}>
+									<TrashIcon size={16} />
+								</div>
 							</div>
 						</li>
 					)}
