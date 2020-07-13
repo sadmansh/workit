@@ -30,7 +30,7 @@ const SignOut = props => {
 							<span onClick={() => setManualSignOutFlag(!manualSignOutFlag)} className="manual-entry-toggle">Or add sign out time manually</span>
 							{manualSignOutFlag ? 
 								<div>
-									<input type="time" onChange={(e) => setManualSignOutTime(moment(e.target.value, 'HH:mm').format('x'))} />
+									<input type="datetime-local" onChange={(e) => setManualSignOutTime(moment(e.target.value, 'YYYY-MM-DDTHH:mm').format('x'))} />
 									<button onClick={() => signOut(manualSignOutTime)}>Add manual sign out</button>
 								</div>
 								:

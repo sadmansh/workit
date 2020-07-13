@@ -263,11 +263,19 @@ a {
 			font-weight: 400;
 		}
 
-		.edit-icon {
+		.task-actions {
 			position: absolute;
 			top: 1rem;
 			right: 1rem;
-			cursor: pointer;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+
+			.edit-icon,
+			.trash-icon {
+				margin-left: .5rem;
+				cursor: pointer;
+			}
 		}
 	}
 }

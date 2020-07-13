@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
 import moment from 'moment'
 
-window.moment = moment
-
 const AddTask = props => {
 	const { entry } = props
 
