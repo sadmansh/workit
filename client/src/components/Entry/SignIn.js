@@ -30,7 +30,7 @@ const SignIn = props => {
 		<div className={editing ? 'editing sign-in' : 'sign-in'} style={{ textAlign: 'center' }}>
 			{entry ? 
 				entry.signIn ? 
-					<div>
+					<>
 						{editing ? 
 							<form className="editing-form" onSubmit={updateSignIn}>
 								<input type="time" name="start" value={moment(manualSignInTime || entry.signIn).format('HH:mm')} onChange={editChangeHandler} />
@@ -44,7 +44,7 @@ const SignIn = props => {
 						<div className="edit-icon" onClick={() => setEditing(!editing)}>
 							<PencilIcon size={16} />
 						</div>
-					</div>
+					</>
 					:
 					''
 				:

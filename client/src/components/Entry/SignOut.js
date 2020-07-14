@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../../actions'
 import moment from 'moment'
+import { PencilIcon } from '@primer/octicons-react'
 
 const SignOut = props => {
 	const [manualSignOutFlag, setManualSignOutFlag] = useState(false)
 	const [manualSignOutTime, setManualSignOutTime] = useState('')
+	const [editing, setEditing] = useState(false)
 	const { tasks } = useSelector(state => state)
 	const { entry } = props
 	const dispatch = useDispatch()
@@ -19,10 +21,32 @@ const SignOut = props => {
 		}
 	}
 
+	const updateSignOut = e => {
+		e.preventDefault()
+		dispatch(actions.updateEntry(entry._id, { signOut: manualSignOutTime }))
+		setEditing(!editing)
+	}
+
 	return (
-		<div className="sign-out">
+		<div className={editing ? 'editing sign-out' : 'sign-out'}>
 			{entry ? 
-				!entry.signOut ? 
+				entry.signOut ? 
+					<>
+						{editing ?
+							<form className="editing-form" onSubmit={updateSignOut}>
+								<input type="time" name="end" value={manualSignOutTime ? moment(manualSignOutTime, 'x').format('HH:mm') : moment(entry.signOut).format('HH:mm')} onChange={(e) => setManualSignOutTime(moment(e.target.value, 'HH:mm').format('x'))} />
+								<button type="submit">Save</button>
+							</form>
+							:
+							<div>
+								<span className="signed-out">Signed out at {moment(entry.signOut).format('hh:mm A')}</span>
+							</div>		
+						}
+						<div className="edit-icon" onClick={() => setEditing(!editing)}>
+							<PencilIcon size={16} />
+						</div>
+					</>
+					:
 					<div style={{ textAlign: 'center' }}>
 						<p>Done for the day? Click sign out</p>
 						<button onClick={() => signOut(Date.now())}>Sign out</button>
@@ -38,9 +62,8 @@ const SignOut = props => {
 							}
 						</div>
 					</div>
-					:
-					<p className="signed-out">Signed out at {moment(entry.signOut).format('hh:mm A')}</p>
-				: ''
+				:
+				''
 			}
 		</div>
 	)
