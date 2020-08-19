@@ -17,7 +17,7 @@ const EntryPicker = props => {
 		if (entry) {
 			history.push(`/dashboard/entries/${entry._id}`)
 		} else {
-			axios.post(`http://localhost:5000/api/entries/add`, { signIn: newEntry }, AuthHeaders).then(res => {
+			axios.post(`https://ms-workit.herokuapp.com/api/entries/add`, { signIn: newEntry }, AuthHeaders).then(res => {
 				setEntry(res.data)
 				history.push(`/dashboard/entries/${res.data._id}`)
 				window.location.reload()
