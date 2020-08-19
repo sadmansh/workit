@@ -5,7 +5,7 @@ const passport = require('passport')
 const morgan = require('morgan')
 const cors = require('cors')
 
-
+process.env.TZ = 'Asia/Dhaka'
 const keys = require('./config/keys')
 require('./models/User')
 require('./models/Entry')
