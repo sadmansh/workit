@@ -29,11 +29,12 @@ const Today = props => {
 		}	
 	}, [props, todayEntry])
 
-	
-
 	return (
 		<div className="today" style={{ textAlign: 'center' }}>
 			<EntryPicker entries={entries} />
+			{todayEntry && todayEntry.signIn ?
+				<h1 className="today-date">Showing tasks for {moment(todayEntry.signIn).format('dddd, MMM D, YYYY')}</h1>
+			: <h1 className="today-date">Showing tasks for {moment(Date.now()).format('dddd, MMM D, YYYY')}</h1>}
 			<SignIn entry={todayEntry} />
 			{todayEntry && todayEntry.signIn ? 
 				<div>
