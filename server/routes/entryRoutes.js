@@ -7,12 +7,20 @@ const Entry = mongoose.model('Entry')
 router.post('/entries/add', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
 	try {
 		const entry = req.body
-		const newEntry = await new Entry({
-			signIn: entry.signIn,
-			signOut: entry.signOut,
-			_user: req.user.id
-		}).save()
-		return res.send(newEntry)
+		const signIn = new Date(entry.signIn).setHours(0, 0, 0, 0)
+		const signInDate = new Date(signIn).getDate() + 1
+		const nextDate = new Date(signIn).setDate(signInDate)
+		const existing = await Entry.findOne({ _user: req.user.id, signIn: { '$gte': signIn, '$lte': nextDate } })
+		if (existing) {
+			return res.send(existing)
+		} else {
+			const newEntry = await new Entry({
+				signIn: entry.signIn,
+				signOut: entry.signOut,
+				_user: req.user.id
+			}).save()
+			return res.send(newEntry)
+		}
 	} catch (error) {
 		console.error(error)
 		return res.status(200).send({ error: error })
