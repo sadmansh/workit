@@ -26,6 +26,7 @@ const EntryPicker = props => {
 	}
 
 	const changeHandler = e => {
+		setError(false)
 		let date = new Date(parseInt(moment(e.target.value, 'YYYY:MM:DD').format('x'))).toISOString()
 		setNewEntry(new Date(parseInt(moment(e.target.value, 'YYYY:MM:DD').format('x'))).toISOString())
 		setNoEntryDate(date)
